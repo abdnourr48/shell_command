@@ -1,0 +1,1 @@
+try { start(); v5Setup(); v6Setup(); v8Setup() } catch (err) { document.body.insertAdjacentHTML('afterbegin', '<div style="background:#fee;color:#600;padding:20px">Startup problem. Open the browser console for details.</div>'); console.error(err) }

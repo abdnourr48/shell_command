@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f6f5ef">
+  <meta name="description"
+    content="Shell Academy 8: offline PowerShell and Bash courses, command catalog, quizzes, virtual labs, and exercises in Arabic, French and English.">
+  <title>Shell Academy — PowerShell &amp; Bash</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/lessons.css">
+  <link rel="stylesheet" href="css/v8.css">
+  <link rel="manifest" href="manifest.webmanifest">
+</head>
+
+<body>
+  <header class="top">
+    <div class="container top-inner">
+      <a class="brand" href="#" aria-label="Shell Academy home">
+        <span class="mark">$ _</span>
+        <span><b>SHELL ACADEMY</b><small>POWER SHELL · BASH · LAB</small></span>
+      </a>
+      <div class="controls">
+        <label>
+          <span class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden">Language</span>
+          <select class="control" id="language" aria-label="Language">
+            <option value="ar">العربية</option>
+            <option value="fr">Français</option>
+            <option value="en">English</option>
+          </select>
+        </label>
+        <button class="control iconbutton" id="theme" type="button" aria-label="Switch dark mode"
+          title="Dark/Light">☾</button>
+      </div>
+    </div>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <p class="eyebrow">VERSION 08 · 975 COMMAND ENTRIES · 184 LESSONS · NO LOGIN · OFFLINE · HTML / CSS / JAVASCRIPT
+      </p>
+      <h1 data-i18n="lead">تعلم الأوامر كأنها بطاقات بسيطة.</h1>
+      <p class="sub" data-i18n="subtitle">دروس ومرجع PowerShell وBash بثلاث لغات مع مختبر وتمارين.</p>
+      <div class="keyline"></div>
+      <nav class="main-tabs" role="tablist" aria-label="Site sections">
+        <button type="button" class="tab" data-tab="lessons" role="tab" data-i18n="v7Lessons">الدروس</button>
+        <button type="button" class="tab" data-tab="paths" role="tab" data-i18n="paths">المسارات</button>
+        <button type="button" class="tab" data-tab="reference" role="tab" data-i18n="reference">الأوامر</button>
+        <button type="button" class="tab" data-tab="lab" role="tab" data-i18n="lab">المختبر</button>
+        <button type="button" class="tab" data-tab="challenges" role="tab" data-i18n="challenges">التدريب</button>
+        <button type="button" class="tab" data-tab="compare" role="tab" data-i18n="compare">مقارنة</button>
+        <button type="button" class="tab" data-tab="settings" role="tab" data-i18n="settings">الإعدادات</button>
+      </nav>
+      <div class="stats">
+        <div class="stat"><b id="stat-total">0</b><span data-i18n="total">أمر وصيغة</span></div>
+        <div class="stat"><b id="stat-done">0</b><span data-i18n="done">تعلمتها</span></div>
+        <div class="stat"><b id="stat-passed">0</b><span data-i18n="passed">تحديات مكتملة</span></div>
+      </div>
+    </section>
+
+    <section class="view" id="view-lessons">
+      <div class="section-head v7-head">
+        <div>
+          <h2 class="section-title" id="v7-title">الدروس المفصلة</h2>
+          <p class="section-intro" id="v7-intro">دروس متعددة اللغات، أمثلة وتدريب عملي</p>
+        </div>
+        <div class="switch">
+          <button type="button" data-v7-shell="bash" class="active">Bash</button>
+          <button type="button" data-v7-shell="powershell">PowerShell</button>
+        </div>
+      </div>
+      <div class="v7-progress">
+        <strong id="v7-total">0 / 32</strong>
+        <div class="progress-track">
+          <div id="v7-progress-fill"></div>
+        </div>
+      </div>
+      <div class="v7-filters">
+        <div class="search-box">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input type="search" id="v7-search" autocomplete="off" aria-label="Search lessons"
+            placeholder="ابحث في الدروس">
+        </div>
+        <select id="v7-module" aria-label="Filter by module">
+          <option value="all">كل الوحدات</option>
+        </select>
+        <button type="button" id="v7-complete-switch" class="minibtn">المكتملة</button>
+        <button type="button" id="v7-glossary-switch" class="minibtn">قاموس المصطلحات</button>
+      </div>
+      <section id="v7-glossary-panel" class="panel v7-glossary" hidden></section>
+      <div class="v7-layout">
+        <aside class="v7-sidebar">
+          <nav id="v7-sidebar-list" aria-label="Lesson outline"></nav>
+        </aside>
+        <article id="v7-reader" class="v7-reader" aria-label="Lesson reading panel"></article>
+      </div>
+    </section>
+    <section class="view" id="view-paths" hidden>
+      <div class="section-head">
+        <div>
+          <h2 class="section-title" data-i18n="pathsTitle">مسارات التعلّم</h2>
+          <p class="section-intro" data-i18n="pathsIntro">من الأوامر الأولى حتى الشبكات والسكربتات. اختَر مساراً ثم ابدأ
+            الدروس بالترتيب.</p>
+        </div>
+        <div class="switch">
+          <button type="button" data-path-shell="bash" class="active">Bash</button>
+          <button type="button" data-path-shell="powershell">PowerShell</button>
+        </div>
+      </div>
+      <div class="progress-overview panel">
+        <div class="progress-heading">
+          <span data-i18n="pathProgress">تقدمك في هذا المسار</span>
+          <b id="paths-percent">0%</b>
+        </div>
+        <div class="progress-track">
+          <div id="paths-bar"></div>
+        </div>
+        <span id="paths-total" class="tiny"></span>
+      </div>
+      <div id="paths-list" class="path-cards"></div>
+    </section>
+
+    <section class="view" id="view-reference">
+      <h2 class="section-title" data-i18n="library">مكتبة الأوامر</h2>
+      <p class="section-intro" data-i18n="librarySub">اضغط التفاصيل...</p>
+      <div class="toolbar">
+        <div class="search-box">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input id="search" type="search" autocomplete="off" placeholder="ابحث عن أمر أو شرح..."
+            aria-label="Search commands">
+        </div>
+        <select id="cat" aria-label="Topic"></select>
+        <select id="level" aria-label="Level"></select>
+      </div>
+      <div class="focus-banner" id="focusBanner" hidden>
+        <span id="focusText"></span>
+        <button type="button" class="minibtn" id="clearFocus" data-i18n="clearFocus">كل الأوامر</button>
+      </div>
+      <div class="switch-row">
+        <div class="switch" aria-label="Shell filter">
+          <button type="button" data-filter="all" class="active" data-i18n="all">الكل</button>
+          <button type="button" data-filter="powershell">PowerShell</button>
+          <button type="button" data-filter="bash">Bash</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <button type="button" class="minibtn" id="favToggle" data-i18n="stars">المفضلة</button>
+          <span id="resultCount" class="result"></span>
+        </div>
+      </div>
+      <div id="cards" class="cards"></div>
+      <div id="empty" class="empty" hidden></div>
+      <button type="button" id="loadMore" class="more" data-i18n="more">عرض المزيد</button>
+    </section>
+    <section class="view" id="view-lab" hidden>
+      <h2 class="section-title" data-i18n="labTitle">مختبر Shell تفاعلي</h2>
+      <p class="section-intro" data-i18n="labSub">محاكاة آمنة للتدريب.</p>
+      <div class="lab-options">
+        <div class="switch">
+          <button type="button" data-lab-shell="bash" class="active">Bash</button>
+          <button type="button" data-lab-shell="powershell">PowerShell</button>
+        </div>
+        <span class="meta-tag">SIMULATION ONLY · NO SYSTEM ACCESS</span>
+      </div>
+      <section class="panel v8-panel" id="v8-network" aria-label="Virtual network lab">
+        <div class="v8-head">
+          <div>
+            <h3 data-v8-label="network">مختبر تشخيص الشبكات</h3>
+            <p data-v8-label="networkSub">سيناريوهات شبكة وهمية بدون اتصال حقيقي.</p>
+          </div>
+          <span class="v8-shell-mark" id="v8-cmd-shell">Bash</span>
+        </div>
+        <div class="v8-fields">
+          <div>
+            <label for="v8-scenario" data-v8-label="case">حالة التدريب</label>
+            <select id="v8-scenario" aria-label="Fault scenario"></select>
+          </div>
+          <button type="button" class="minibtn primary" id="v8-load" data-v8-label="prepare">تحميل الحالة</button>
+          <button type="button" class="minibtn" id="v8-healthy" data-v8-label="reset">شبكة سليمة</button>
+        </div>
+        <div id="v8-story" class="v8-story"></div>
+        <div class="v8-lab-cols">
+          <div>
+            <h4 data-v8-label="probe">أوامر مقترحة</h4>
+            <div id="v8-probes" class="v8-command-list"></div>
+          </div>
+          <div>
+            <div class="v8-answers">
+              <div>
+                <label for="v8-diagnosis" data-v8-label="cause">السبب الرئيسي</label>
+                <select id="v8-diagnosis"></select>
+              </div>
+              <button type="button" class="minibtn primary" id="v8-check" data-v8-label="check">فحص التشخيص</button>
+            </div>
+            <p class="v8-feedback" id="v8-feedback" role="status"></p>
+          </div>
+        </div>
+        <button type="button" id="v8-reveal" class="minibtn" data-v8-label="show">كشف الحالة الافتراضية</button>
+        <div id="v8-state" class="v8-state" hidden></div>
+        <p class="v8-small" data-v8-label="offline">محاكاة محلية؛ بدون حزم شبكة حقيقية.</p>
+      </section>
+      <section class="v5-workspace panel" aria-label="Advanced lab workspaces">
+        <div class="v5-title">
+          <h3 id="v5-heading">Advanced lab · workspaces</h3>
+          <span class="v5-quiet">V7 · OFFLINE</span>
+        </div>
+        <div class="v5-scenario-row">
+          <label for="v5-scenario" id="v5-scenario-label">Choose scenario</label>
+          <select id="v5-scenario" aria-label="Choose scenario"></select>
+          <button type="button" id="v5-load" class="minibtn primary">Load</button>
+          <button type="button" id="v5-verify" class="minibtn">Verify</button>
+        </div>
+        <p class="v5-goal"><strong id="v5-goal-label">Objective</strong> <span id="v5-objective"></span></p>
+        <div class="v5-code">
+          <span id="v5-idea-label">Suggested command</span>
+          <code id="v5-suggestion" dir="ltr"></code>
+          <button type="button" class="minibtn" id="v5-fill">Use command</button>
+        </div>
+        <div id="v5-feedback" class="feedback" role="status"></div>
+        <div class="v5-utility">
+          <button type="button" class="minibtn" id="v5-undo">Undo</button>
+          <button type="button" class="minibtn" id="v5-redo">Redo</button>
+          <button type="button" class="minibtn" id="v5-checkpoint">Save checkpoint</button>
+          <button type="button" class="minibtn" id="v5-restore">Restore</button>
+          <button type="button" class="minibtn" id="v5-copy-output">Copy output</button>
+        </div>
+        <p class="tiny" id="v5-reset-note">Loading replaces this virtual workspace only.</p>
+      </section>
+      <section id="v5-editor" class="panel v5-editor" hidden>
+        <div class="v5-title">
+          <h3 id="v5-editor-title">Virtual file editor</h3>
+          <span id="v5-filename" dir="ltr"></span>
+        </div>
+        <label id="v5-file-label" for="v5-file-content">File contents</label>
+        <textarea id="v5-file-content" spellcheck="false" rows="11" dir="ltr"
+          aria-label="Virtual file content"></textarea>
+        <p id="v5-edit-hint" class="tiny">Virtual files only, no device access.</p>
+        <div class="lab-actions">
+          <button type="button" id="v5-save" class="minibtn primary">Save</button>
+          <button type="button" id="v5-cancel" class="minibtn">Close</button>
+        </div>
+      </section>
+      <section class="panel v6-toolbox" aria-labelledby="v6-toolbox-title">
+        <div class="v6-head">
+          <div>
+            <h3 id="v6-toolbox-title">Terminal diagnostics · workspace tools</h3>
+            <p id="v6-workspace-note" class="tiny">The simulator cannot access your PC or network.</p>
+          </div>
+          <span class="v6-version">LAB ENGINE 7</span>
+        </div>
+        <div class="v6-health">
+          <div><small id="v6-label-status">Last result</small><strong id="v6-status">—</strong></div>
+          <div><small id="v6-label-time">Execution time</small><strong id="v6-time">—</strong></div>
+          <div><small id="v6-label-calls">Commands in session</small><strong id="v6-count">0</strong></div>
+        </div>
+        <div class="v6-actions">
+          <button type="button" class="minibtn" id="v6-explain">Explain command</button>
+          <button type="button" class="minibtn" id="v6-export">Export virtual workspace</button>
+          <button type="button" class="minibtn" id="v6-import">Import virtual workspace</button>
+          <input type="file" id="v6-file" hidden accept=".json,application/json">
+          <button type="button" class="minibtn" id="v6-reset">New clean workspace</button>
+        </div>
+        <div id="v6-analysis" class="v6-analysis" hidden aria-live="polite"></div>
+      </section>
+      <div class="v4-lab-top">
+        <div id="v4-lab-stat">...</div>
+        <span id="v4-tip">Tab · ↑ ↓ · Ctrl+L</span>
+      </div>
+      <div class="lab-grid">
+        <div class="panel">
+          <div class="terminal">
+            <div class="terminal-top">
+              <span><span class="dots">● ● ●</span> &nbsp; <span id="terminalType">Bash</span></span>
+              <span>local-lab</span>
+            </div>
+            <div class="terminal-out" id="terminalOutput" role="log" aria-live="polite"></div>
+            <form class="term-form" id="terminalForm">
+              <span class="term-prompt" id="termPrompt">$</span>
+              <datalist id="v4-datalist"></datalist>
+              <input type="text" id="command" aria-label="Terminal command" spellcheck="false" autocomplete="off"
+                autocapitalize="off" placeholder="pwd">
+              <button type="submit" data-i18n="run">تنفيذ</button>
+            </form>
+          </div>
+          <div class="lab-actions">
+            <button type="button" class="minibtn" id="labHelpBtn" data-i18n="helpBtn">الأوامر المدعومة</button>
+            <button type="button" class="minibtn" id="labClearBtn" data-i18n="clear">مسح الشاشة</button>
+            <button type="button" class="minibtn" id="labResetBtn" data-i18n="reset">إعادة تهيئة</button>
+            <button type="button" class="minibtn" id="labTranscript" data-i18n="transcript">حفظ سجل الأوامر</button>
+          </div>
+          <p class="lab-note" data-i18n="labNote">محاكاة افتراضية.</p>
+        </div>
+        <aside class="panel">
+          <h3 data-i18n="guide">بداية سريعة</h3>
+          <p data-i18n="guideText">جرب pwd و ls.</p>
+          <h3 data-i18n="files">الملفات المتاحة</h3>
+          <div id="fileList" class="lab-list"></div>
+          <h3 data-i18n="helpBtn" style="margin-top:19px">الأوامر المدعومة</h3>
+          <div id="labCommandList" class="lab-list"></div>
+          <div class="v4-box">
+            <h3 id="v4-folder-title">مستكشف الملفات</h3>
+            <div id="v4-file-tree" aria-label="Virtual files"></div>
+            <div class="v4-toolrow"><button type="button" class="minibtn" id="v4-import">استيراد TXT</button><input
+                type="file" id="v4-upload" accept=".txt,.log,.csv,.json,.md,text/plain" hidden /></div>
+          </div>
+          <h3 class="lab-quick-title" data-i18n="quickExamples">أمثلة جاهزة</h3>
+          <div id="labQuickBtns" class="lab-quick"></div>
+          <div class="v4-box">
+            <h3 id="v4-example-heading">أمثلة متقدمة</h3>
+            <div id="v4-examples"></div>
+          </div>
+        </aside>
+      </div>
+      <div class="panel v8-panel">
+        <h3 data-v8-label="keyboard">لوحة مفاتيح Terminal</h3>
+        <div class="v8-kbd" id="v8-keyboard"><button type="button" class="minibtn" data-keys=" | ">|</button><button
+            type="button" class="minibtn" data-keys=" &gt; ">></button><button type="button" class="minibtn"
+            data-keys=" &gt;&gt; ">>></button><button type="button" class="minibtn"
+            data-keys=" &amp;&amp; ">&&</button><button type="button" class="minibtn" data-keys=" -">-</button><button
+            type="button" class="minibtn" data-keys="/">/</button><button type="button" class="minibtn"
+            data-keys="../">../</button><button type="button" class="minibtn" data-keys="&quot;&quot;">"
+            "</button><button type="button" class="minibtn" data-keys=" $"> $</button></div>
+      </div>
+      <div class="panel v8-panel">
+        <h3 data-v8-label="diagnostic">مساعد تحليل الأخطاء</h3>
+        <p data-v8-label="errorSub" class="v8-small"></p>
+        <div id="v8-live-diagnostic" class="v8-code-output" role="status">—</div>
+        <p class="v8-small" id="v8-last-cmd" dir="ltr"></p>
+        <div class="v8-error-layout"><input id="v8-error-input" class="v8-input" aria-label="Error message"
+            placeholder="ERROR: File not found / Permission denied / DNS failed" maxlength="2000"><button type="button"
+            id="v8-error-button" class="minibtn primary" data-v8-label="analyze">تحليل الخطأ</button></div>
+        <div id="v8-error-out" class="v8-code-output" role="status"></div>
+      </div>
+      <p id="v4-limit" class="v4-sub">Teaching simulator only — isolated virtual data.</p>
+      <details class="v4-task-section">
+        <summary id="v4-mission-title">مهام المختبر المتقدمة</summary>
+        <div class="v4-task-body">
+          <p class="section-intro" id="v4-mission-intro">مهام عملية</p>
+          <div id="v4-missions" class="v4-task-grid"></div>
+        </div>
+      </details>
+    </section>
+    <section class="view" id="view-challenges" hidden>
+      <h2 class="section-title" data-i18n="taskTitle">تحديات Shell</h2>
+      <p class="section-intro" data-i18n="taskSub">تمارين عملية.</p>
+      <div class="panel" style="max-width:790px">
+        <div class="switch">
+          <button type="button" data-task-shell="bash" class="active">Bash</button>
+          <button type="button" data-task-shell="powershell">PowerShell</button>
+        </div>
+        <div class="switch-row" style="margin-bottom:0">
+          <b id="taskIndex" class="result" style="direction:ltr">1 / 12</b>
+        </div>
+        <div id="taskNav" class="task-nav"></div>
+        <div id="taskQuestion" class="task-question"></div>
+        <p class="section-intro" data-i18n="taskTip">نفذ المطلوب ثم اضغط تحقق.</p>
+        <div class="lab-actions">
+          <button type="button" class="minibtn primary" id="taskLab" data-i18n="goLab">اذهب للمختبر</button>
+          <button type="button" class="minibtn" id="taskCheck" data-i18n="check">تحقق من الإجابة</button>
+          <button type="button" class="minibtn" id="taskNext" data-i18n="next">التالي</button>
+        </div>
+        <div id="feedback" class="feedback" role="status"></div>
+      </div>
+      <div class="module-group" id="quizArea">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title" data-i18n="quizTitle">اختبار المعرفة</h2>
+            <p class="section-intro" data-i18n="quizIntro">أسئلة قصيرة، شرح لكل إجابة، وحفظ أعلى نتيجة.</p>
+          </div>
+          <div class="switch">
+            <button type="button" data-quiz-shell="bash" class="active">Bash</button>
+            <button type="button" data-quiz-shell="powershell">PowerShell</button>
+          </div>
+        </div>
+        <div class="panel quiz-panel">
+          <div class="quiz-top"><span id="quiz-counter"></span><span id="quiz-best"></span></div>
+          <div class="progress-track">
+            <div id="quiz-progress"></div>
+          </div>
+          <h3 id="quiz-question"></h3>
+          <div id="quiz-options" class="quiz-options"></div>
+          <div id="quiz-feedback" class="feedback" role="status"></div>
+          <div class="lab-actions">
+            <button type="button" class="minibtn primary" id="quizCheck" data-i18n="check">تحقق</button>
+            <button type="button" class="minibtn" id="quizNext" data-i18n="next">التالي</button>
+            <button type="button" class="minibtn" id="quizRestart" data-i18n="restartQuiz">إعادة الاختبار</button>
+          </div>
+        </div>
+      </div>
+      <div class="module-group">
+        <h2 class="section-title" data-i18n="projectsTitle">مشاريع مختبر قصيرة</h2>
+        <p class="section-intro" data-i18n="projectsIntro">أنجز مهمة داخل الملفات الافتراضية، ثم افحص النتيجة، وليس
+          الأمر المكتوب فقط.</p>
+        <div id="projectsList" class="projects-list"></div>
+      </div>
+    </section>
+
+    <section class="view" id="view-compare" hidden>
+      <h2 class="section-title" data-i18n="compareTitle">PowerShell مقابل Bash</h2>
+      <p class="section-intro" data-i18n="compareIntro">جدول لأوامر تؤدي مهاماً متشابهة، لكن الصياغة والنتيجة قد تختلف
+        بين النظامين.</p>
+      <div class="toolbar compare-search">
+        <div class="search-box">
+          <span class="search-icon">⌕</span>
+          <input type="search" id="compareSearch" aria-label="Search command comparison" placeholder="Search">
+        </div>
+      </div>
+      <section class="panel v8-panel v8-compare">
+        <div class="v8-head">
+          <div>
+            <h3 data-v8-label="translator">مقارنة سريعة للأوامر</h3>
+            <p data-v8-label="translatorSub">بدائل تقريبية، لا تنفّذ.</p>
+          </div>
+        </div>
+        <div class="v8-translate-layout">
+          <input id="v8-translate-input" class="v8-input" dir="ltr" placeholder="grep ERROR app.log" maxlength="350"
+            aria-label="Command to compare">
+          <button type="button" class="minibtn primary" id="v8-translate-button" data-v8-label="translate">ابحث عن
+            بديل</button>
+        </div>
+        <pre id="v8-translate-output" class="v8-code-output" role="status"></pre>
+      </section>
+      <div class="comparison-head">
+        <b>Bash</b>
+        <b>PowerShell</b>
+        <span data-i18n="purpose">الهدف</span>
+      </div>
+      <div id="compareRows" class="compare-rows"></div>
+      <div class="panel compare-caution" data-i18n="compareCaution">ليست جميع الأوامر بدائل متطابقة. Bash يتعامل غالباً
+        مع النصوص، وPowerShell يستعمل كائنات في الـ Pipeline.</div>
+    </section>
+
+    <section class="view" id="view-settings" hidden>
+      <h2 class="section-title" data-i18n="settingsTitle">الإعدادات والبيانات</h2>
+      <p class="section-intro" data-i18n="settingsIntro">التقدم والملاحظات محفوظة محلياً في متصفحك فقط. يمكنك أخذ نسخة
+        أو استرجاعها.</p>
+      <div class="settings-grid">
+        <div class="panel">
+          <h3 data-i18n="progressTitle">ملخص التقدم</h3>
+          <div id="progressSummary"></div>
+        </div>
+        <div class="panel">
+          <h3 data-i18n="backupTitle">النسخ الاحتياطي</h3>
+          <p data-i18n="backupHint">صدّر التقدم والمفضلة والملاحظات، أو استورد ملف JSON محفوظاً مسبقاً.</p>
+          <div class="lab-actions">
+            <button type="button" class="minibtn primary" id="exportBtn" data-i18n="exportBtn">تصدير بياناتي</button>
+            <button type="button" class="minibtn" id="importBtn" data-i18n="importBtn">استيراد البيانات</button>
+            <input id="importFile" type="file" accept=".json,application/json" hidden>
+          </div>
+        </div>
+        <div class="panel">
+          <h3 data-i18n="studySheet">ملخص الأوامر</h3>
+          <p data-i18n="sheetHint">أنشئ ملف نصي يحتوي الأوامر والأمثلة والشرح باللغة المحددة.</p>
+          <button type="button" class="minibtn" id="sheetBtn" data-i18n="sheetBtn">تحميل الملخص TXT</button>
+        </div>
+        <div class="panel">
+          <h3 data-i18n="dangerTitle">حذف التقدم</h3>
+          <p data-i18n="dangerHint">يمسح التقدم والمفضلة والملاحظات والاختبارات من هذا المتصفح فقط.</p>
+          <button type="button" class="minibtn danger" id="wipeBtn" data-i18n="wipeBtn">مسح بياناتي المحلية</button>
+        </div>
+      </div>
+      <div class="panel keyboard-panel">
+        <h3 data-i18n="shortcutsTitle">اختصارات لوحة المفاتيح</h3>
+        <p><kbd>/</kbd> <span data-i18n="searchShortcut">الانتقال للبحث</span> · <kbd>↑</kbd> <kbd>↓</kbd> <span
+            data-i18n="historyShortcut">تاريخ أوامر المختبر</span> · <kbd>Esc</kbd> <span data-i18n="escapeShortcut">مسح
+            البحث أو الاقتراح</span></p>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span data-i18n="pageFoot">تعلم محلياً، دون حساب، ودون تنفيذ على نظام التشغيل.</span>
+      <span class="small-code">SHELL ACADEMY </span>
+    </div>
+  </footer>
+  <div id="toast" hidden aria-live="polite"
+    style="position:fixed;bottom:24px;inset-inline-end:20px;background:#263d2c;color:white;padding:11px 18px;border-radius:10px;z-index:9">
+  </div>
+  <script src="js/catalog.js" defer></script>
+  <script src="js/lab-engine.js" defer></script>
+  <script src="js/lab-v8-core.js" defer></script>
+  <script src="js/lessons-data.js" defer></script>
+  <script src="js/lessons-v8-data.js" defer></script>
+  <script src="js/lessons-v8-projects.js" defer></script>
+  <script src="js/app.js" defer></script>
+  <script src="js/lab-ui.js" defer></script>
+  <script src="js/lab-v5.js" defer></script>
+  <script src="js/lab-v6.js" defer></script>
+  <script src="js/lessons.js" defer></script>
+  <script src="js/v8-ui.js" defer></script>
+  <script src="js/bootstrap.js" defer></script>
+  <script src="js/pwa.js" defer></script>
+</body>
+
+</html>

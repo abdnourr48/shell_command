@@ -1,0 +1,6 @@
+'use strict';
+const CACHE = 'shell-academy-20261105-r2';
+const FILES = ['./', './index.html', './manifest.webmanifest', './assets/icon.svg', './assets/icon-192.png', './assets/icon-512.png', './css/style.css', './css/lessons.css', './css/v8.css', './js/catalog.js', './js/lab-engine.js', './js/lab-v8-core.js', './js/lessons-data.js', './js/lessons-v8-data.js', './js/lessons-v8-projects.js', './js/app.js', './js/lab-ui.js', './js/lab-v5.js', './js/lab-v6.js', './js/lessons.js', './js/v8-ui.js', './js/bootstrap.js', './js/pwa.js'];
+self.addEventListener('install', event => { event.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting())) });
+self.addEventListener('activate', event => { event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(x => x.startsWith('shell-academy-') && x !== CACHE).map(x => caches.delete(x)))).then(() => self.clients.claim())) });
+self.addEventListener('fetch', event => { const req = event.request; if (req.method !== 'GET' || new URL(req.url).origin !== self.location.origin) return; event.respondWith(caches.match(req).then(hit => hit || fetch(req).then(res => { if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put(req, copy)).catch(() => { }) } return res }))) });
