@@ -1,7 +1,7 @@
 {
   "name": "Shell Academy",
-  "short_name": "Shell Academy Lessons",
-  "description": "Offline Bash and PowerShell lessons for beginners and advanced users. Learn Linux and Windows shell scripting with interactive exercises.",
+  "short_name": "Shell Academy",
+  "description": "Offline Bash and PowerShell lessons ",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
